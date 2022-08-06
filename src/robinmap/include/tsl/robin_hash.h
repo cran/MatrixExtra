@@ -33,6 +33,7 @@
 #include <iterator>
 #include <limits>
 #include <memory>
+#include <new>
 #include <stdexcept>
 #include <tuple>
 #include <type_traits>
@@ -195,6 +196,7 @@ class bucket_entry : public bucket_entry_hash<StoreHash> {
           value_type(other.value());
       m_dist_from_ideal_bucket = other.m_dist_from_ideal_bucket;
     }
+    tsl_rh_assert(empty() == other.empty());
   }
 
   /**
@@ -212,6 +214,7 @@ class bucket_entry : public bucket_entry_hash<StoreHash> {
           value_type(std::move(other.value()));
       m_dist_from_ideal_bucket = other.m_dist_from_ideal_bucket;
     }
+    tsl_rh_assert(empty() == other.empty());
   }
 
   bucket_entry& operator=(const bucket_entry& other) noexcept(
@@ -249,12 +252,22 @@ class bucket_entry : public bucket_entry_hash<StoreHash> {
 
   value_type& value() noexcept {
     tsl_rh_assert(!empty());
+#if defined(__cplusplus) && __cplusplus >= 201703L
+    return *std::launder(
+        reinterpret_cast<value_type*>(std::addressof(m_value)));
+#else
     return *reinterpret_cast<value_type*>(std::addressof(m_value));
+#endif
   }
 
   const value_type& value() const noexcept {
     tsl_rh_assert(!empty());
+#if defined(__cplusplus) && __cplusplus >= 201703L
+    return *std::launder(
+        reinterpret_cast<const value_type*>(std::addressof(m_value)));
+#else
     return *reinterpret_cast<const value_type*>(std::addressof(m_value));
+#endif
   }
 
   distance_type dist_from_ideal_bucket() const noexcept {
@@ -283,6 +296,7 @@ class bucket_entry : public bucket_entry_hash<StoreHash> {
   void swap_with_value_in_bucket(distance_type& dist_from_ideal_bucket,
                                  truncated_hash_type& hash, value_type& value) {
     tsl_rh_assert(!empty());
+    tsl_rh_assert(dist_from_ideal_bucket > m_dist_from_ideal_bucket);
 
     using std::swap;
     swap(value, this->value());
@@ -659,7 +673,7 @@ class robin_hash : private Hash, private KeyEqual, private GrowthPolicy {
 
   robin_hash& operator=(robin_hash&& other) {
     other.swap(*this);
-    other.clear();
+    other.clear_and_shrink();
 
     return *this;
   }
@@ -1068,6 +1082,7 @@ class robin_hash : private Hash, private KeyEqual, private GrowthPolicy {
     m_max_load_factor = clamp(ml, float(MINIMUM_MAX_LOAD_FACTOR),
                               float(MAXIMUM_MAX_LOAD_FACTOR));
     m_load_threshold = size_type(float(bucket_count()) * m_max_load_factor);
+    tsl_rh_assert(bucket_count() == 0 || m_load_threshold < bucket_count());
   }
 
   void rehash(size_type count_) {
@@ -1271,6 +1286,8 @@ class robin_hash : private Hash, private KeyEqual, private GrowthPolicy {
   void insert_value_impl(std::size_t ibucket,
                          distance_type dist_from_ideal_bucket,
                          truncated_hash_type hash, value_type& value) {
+    tsl_rh_assert(dist_from_ideal_bucket >
+                  m_buckets[ibucket].dist_from_ideal_bucket());
     m_buckets[ibucket].swap_with_value_in_bucket(dist_from_ideal_bucket, hash,
                                                  value);
     ibucket = next_bucket(ibucket);
@@ -1304,6 +1321,7 @@ class robin_hash : private Hash, private KeyEqual, private GrowthPolicy {
     robin_hash new_table(count_, static_cast<Hash&>(*this),
                          static_cast<KeyEqual&>(*this), get_allocator(),
                          m_min_load_factor, m_max_load_factor);
+    tsl_rh_assert(size() <= new_table.m_load_threshold);
 
     const bool use_stored_hash =
         USE_STORED_HASH_ON_REHASH(new_table.bucket_count());
@@ -1571,6 +1589,7 @@ class robin_hash : private Hash, private KeyEqual, private GrowthPolicy {
    */
   bucket_entry* static_empty_bucket_ptr() noexcept {
     static bucket_entry empty_bucket(true);
+    tsl_rh_assert(empty_bucket.empty());
     return &empty_bucket;
   }
 
