@@ -1,8 +1,8 @@
-5e5f0fe4f404d122c05e3eb278d3466a *DESCRIPTION
+b8d66457c06a9fd95d9b4025fc9ad4ae *DESCRIPTION
 3805cb704c7f34f0d0c0022053f44796 *NAMESPACE
 2aa8deb9e2bfef25dc366f8085f36fb5 *R/MatrixExtra.R
 6e19947261dd222061ac4e01947cf735 *R/RcppExports.R
-d42d4d128251a99651de189da99a9335 *R/assignment.R
+38b473b5cd169b5d360995dbf16c43f6 *R/assignment.R
 0c3bf2b1f195532fa3c07a16f226a843 *R/cbind.R
 c618d265ca8243df5e9c1ebd1cf7b1ec *R/conversions.R
 9436975f184271ddf07e6181012cfaa5 *R/csr_linalg.R
@@ -17,8 +17,8 @@ db1d0d946c0af6cbfb8f36b952b16384 *R/rbind.R
 7aa7711ef4e4af358dfe4ed3c5217c8d *R/utils.R
 f3523a2e9b1f9acba9c41eb8738a65ae *R/zzz.R
 ed7ca5ee1f011c291cd2de9d276dd4ae *build/vignette.rds
-7324c2bcdce4432e22a1ef5cb0c80bf7 *configure
-b2831a465c19248a35a9a10b2acaf69e *configure.ac
+88c6ef5f37f942e1784db087039dfaa3 *configure
+49dabb84785a2b6c6ef202417def2236 *configure.ac
 674ebe5164982c9ca2d326d416ea1328 *configure.win
 816363a68436c66d71208e558cf002bf *inst/COPYRIGHTS
 ba38f344bbac64d53b6198548c5421f1 *inst/doc/Introducing_MatrixExtra.html
