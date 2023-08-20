@@ -1,6 +1,6 @@
-b8d66457c06a9fd95d9b4025fc9ad4ae *DESCRIPTION
+282ff7af1283036a0602df6dd5601880 *DESCRIPTION
 3805cb704c7f34f0d0c0022053f44796 *NAMESPACE
-2aa8deb9e2bfef25dc366f8085f36fb5 *R/MatrixExtra.R
+23e954431c88d71bc411c86d18870274 *R/MatrixExtra.R
 6e19947261dd222061ac4e01947cf735 *R/RcppExports.R
 38b473b5cd169b5d360995dbf16c43f6 *R/assignment.R
 0c3bf2b1f195532fa3c07a16f226a843 *R/cbind.R
@@ -23,7 +23,7 @@ ed7ca5ee1f011c291cd2de9d276dd4ae *build/vignette.rds
 816363a68436c66d71208e558cf002bf *inst/COPYRIGHTS
 ba38f344bbac64d53b6198548c5421f1 *inst/doc/Introducing_MatrixExtra.html
 c08bdb05fdb8d310211fa6540bda7426 *man/MatrixExtra-options.Rd
-798f070d8d5941bf6d2b8c64cc917590 *man/MatrixExtra.Rd
+7e2845a2b9e7a87482d72a79bd2f191d *man/MatrixExtra.Rd
 415667a5acc19729c28dc1956b7a308b *man/assignment.Rd
 bb7109c6fc3b8434831e08e17dbd2d2b *man/cbind2-method.Rd
 8a5fc6a209657380797c2e5a2cbc6d5e *man/check_sparse_matrix.Rd
@@ -43,8 +43,8 @@ d0046c61875cf65672659d398c6ab6f4 *man/rbind_csr.Rd
 de9102ce4d881efbf13ced356e5e061a *man/slice.Rd
 37b97c9405e64e9ffb57f224d2685101 *man/sort_sparse_indices.Rd
 3426ead07982eb08533ead6768ec278f *man/t_shallow.Rd
-a88dc35813f7f156e46c8029378533dc *src/Makevars.in
-3468088fad04c57ee95add5ba88ce3da *src/Makevars.win.in
+036c994c3a8cd9e0ae78cea3fbf532c0 *src/Makevars.in
+eac39a4a013ec34aee11ef459547a93d *src/Makevars.win.in
 1375c0a2ab5d191efcc890080dd68a2d *src/MatrixExtra-win.def
 7d712361973ccc1d5c38237d01fb64b7 *src/MatrixExtra.h
 192005e1221059c0c6f6a644f9182b94 *src/RcppExports.cpp
@@ -56,7 +56,7 @@ df2411e1fa1b5dbcec4f467d50117e92 *src/operators.cpp
 261a09d4bfbdd23835ccb263aa8cfe78 *src/rbind.cpp
 7d9128c23e4bdb36bdceedce604442e0 *src/robinmap/LICENSE
 8b8d2e675d00ae8e71487f5947a6b5f9 *src/robinmap/include/tsl/robin_growth_policy.h
-8b305afbfffb0d412cfb33b3b57e542c *src/robinmap/include/tsl/robin_hash.h
+f7affeeb9ced05de005cbc345c3af640 *src/robinmap/include/tsl/robin_hash.h
 716f27ac31761cad30c66ff4c340df22 *src/robinmap/include/tsl/robin_map.h
 6b01c8374554e6417266eb8e7077d762 *src/robinmap/include/tsl/robin_set.h
 6941de32e03858728d0b23b580ecccd9 *src/slice.cpp
